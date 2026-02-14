@@ -14,17 +14,43 @@ The Pomodoro timer for people who tried the others and got annoyed.
 
 Every Pomodoro app eventually becomes bloated. They add task management, team features, integrations, subscriptions, and ads. Pomodorino doesn't.
 
-| | Other Apps | Pomodorino |
-|---|---|---|
-| **Ads** | Yes | No |
-| **Subscription** | $5-10/month | Free |
-| **Account required** | Usually | Never |
-| **Cloud sync** | Your data on their servers | Local only |
-| **Task management** | Bolted on | Not included |
-| **Integrations** | Slack, Notion, etc. | None |
-| **App size** | 50-200MB | ~5MB |
-
 **Your focus data never leaves your Mac.**
+
+---
+
+## Feature Comparison
+
+| Feature | Pomodorino | TomatoBar | Flow | Session | Be Focused Pro |
+|---------|:----------:|:---------:|:----:|:-------:|:--------------:|
+| **Price** | Free | Free | $18/yr | $40/yr | $10 × 2 |
+| **Ads** | ✗ | ✗ | ✗ | ✗ | ✗ |
+| **Open Source** | ✓ | ✓ | ✗ | ✗ | ✗ |
+| **Native Swift** | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Menu Bar Timer** | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Global Hotkey** | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Completion Sounds** | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Countdown Ticker** | ✓ | ✗ | ✗ | ✗ | ✗ |
+| **Local Analytics** | ✓ | ✗ | ✗ | ✓ | ✓ |
+| **Weekly/Monthly Stats** | ✓ | ✗ | ✗ | ✓ | ✓ |
+| **100% Local Storage** | ✓ | ✓ | ✗ | ✗ | ✓ |
+| **No Account Required** | ✓ | ✓ | ✓ | ✗ | ✓ |
+| **Launch at Login** | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **App/Web Blocking** | ✗ | ✗ | ✓ | ✓ | ✗ |
+| **Task Management** | ✗ | ✗ | ✗ | ✓ | ✓ |
+| **iOS Companion** | ✗ | ✗ | ✓ | ✓ | ✓ |
+| **iCloud Sync** | ✗ | ✗ | ✓ | ✓ | ✓ |
+| **Integrations** | ✗ | ✗ | ✗ | ✓ | ✗ |
+
+**Legend:** ✓ = Yes | ✗ = No
+
+### The Trade-off
+
+Apps like Session and Flow offer more features—but at a cost:
+- **Session:** $40/year for task management, sync, and integrations you may not need
+- **Flow:** $18/year for app blocking (useful, but bloats a simple timer)
+- **Be Focused Pro:** $10 for Mac + $10 for iOS, dated interface
+
+**Pomodorino** gives you analytics and a polished timer with zero recurring cost and zero data leaving your machine. If you just want to focus and track your progress locally, this is it.
 
 ---
 
