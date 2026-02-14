@@ -30,7 +30,7 @@
 		37381671A153838D503EE9C5 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		3A8E42A96BB0B74331951B42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		512BDB4D07FBA84442EAAEE0 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		63C3248B9FAB5C802C03D8BA /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		63C3248B9FAB5C802C03D8BA /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodorino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D210016A34658A1F56C6E47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FD1A2E0CCDAE9283C2C6FEA /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		976B7EFE4A7E2E55B6638A50 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		386C7C26EC13AE794F4AA179 /* Pomodoro */ = {
+		386C7C26EC13AE794F4AA179 /* Pomodorino */ = {
 			isa = PBXGroup;
 			children = (
 				820BAEBCF31F8F84C0EDD7A3 /* App */,
@@ -78,7 +78,7 @@
 				4D617166703784930FA7519A /* Services */,
 				092CBF565D2F921EFC086229 /* Views */,
 			);
-			path = Pomodoro;
+			path = Pomodorino;
 			sourceTree = "<group>";
 		};
 		4D617166703784930FA7519A /* Services */ = {
@@ -94,7 +94,7 @@
 		7224001E175C4EE63B46324D = {
 			isa = PBXGroup;
 			children = (
-				386C7C26EC13AE794F4AA179 /* Pomodoro */,
+				386C7C26EC13AE794F4AA179 /* Pomodorino */,
 				2E8674BBDE16B20B81905870 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -122,7 +122,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7903707A219EEB0A29FD23BD /* Pomodoro */ = {
+		7903707A219EEB0A29FD23BD /* Pomodorino */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E60CD5C7520207E12DB32B0 /* Build configuration list for PBXNativeTarget "Pomodorino" */;
 			buildPhases = (
@@ -136,7 +136,7 @@
 			name = Pomodorino;
 			packageProductDependencies = (
 			);
-			productName = Pomodoro;
+			productName = Pomodorino;
 			productReference = 63C3248B9FAB5C802C03D8BA /* Pomodoro.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -163,7 +163,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7903707A219EEB0A29FD23BD /* Pomodoro */,
+				7903707A219EEB0A29FD23BD /* Pomodorino */,
 			);
 		};
 /* End PBXProject section */
