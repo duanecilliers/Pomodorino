@@ -10,6 +10,20 @@ The Pomodoro timer for people who tried the others and got annoyed.
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/timer-running.png" width="280" alt="Timer Running" />
+  <img src="screenshots/break-running.png" width="280" alt="Break Running" />
+  <img src="screenshots/stats.png" width="280" alt="Stats" />
+</p>
+
+<p align="center">
+  <img src="screenshots/settings.png" width="280" alt="Settings" />
+</p>
+
+---
+
 ## Why Pomodorino?
 
 Every Pomodoro app eventually becomes bloated. They add task management, team features, integrations, subscriptions, and ads. Pomodorino doesn't.
@@ -71,8 +85,8 @@ Apps like Session and Flow offer more features—but at a cost:
 ### From Source
 
 ```bash
-git clone https://github.com/yourusername/pomodorino.git
-cd pomodorino
+git clone https://github.com/duanecilliers/Pomodorino.git
+cd Pomodorino
 open Pomodorino.xcodeproj
 # Build with ⌘B, Run with ⌘R
 ```
