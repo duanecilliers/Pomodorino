@@ -124,7 +124,7 @@
 /* Begin PBXNativeTarget section */
 		7903707A219EEB0A29FD23BD /* Pomodoro */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E60CD5C7520207E12DB32B0 /* Build configuration list for PBXNativeTarget "Pomodoro" */;
+			buildConfigurationList = 3E60CD5C7520207E12DB32B0 /* Build configuration list for PBXNativeTarget "Pomodorino" */;
 			buildPhases = (
 				BDF2DF9B9A082E540AD3F574 /* Sources */,
 				4E9E285D4E4C573489FD28D2 /* Resources */,
@@ -133,7 +133,7 @@
 			);
 			dependencies = (
 			);
-			name = Pomodoro;
+			name = Pomodorino;
 			packageProductDependencies = (
 			);
 			productName = Pomodoro;
@@ -149,7 +149,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 			};
-			buildConfigurationList = 3BA78823BED85E98FA1F9BA4 /* Build configuration list for PBXProject "Pomodoro" */;
+			buildConfigurationList = 3BA78823BED85E98FA1F9BA4 /* Build configuration list for PBXProject "Pomodorino" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -327,12 +327,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGN_ENTITLEMENTS = Pomodoro/Resources/Pomodoro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Pomodorino/Resources/Pomodorino.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Pomodoro/Resources/Info.plist;
+				INFOPLIST_FILE = Pomodorino/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
@@ -347,12 +347,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_REQUIRED = NO;
-				CODE_SIGN_ENTITLEMENTS = Pomodoro/Resources/Pomodoro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Pomodorino/Resources/Pomodorino.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Pomodoro/Resources/Info.plist;
+				INFOPLIST_FILE = Pomodorino/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.0;
@@ -365,7 +365,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3BA78823BED85E98FA1F9BA4 /* Build configuration list for PBXProject "Pomodoro" */ = {
+		3BA78823BED85E98FA1F9BA4 /* Build configuration list for PBXProject "Pomodorino" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				476E3910E9638717F55D4E21 /* Debug */,
@@ -374,7 +374,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		3E60CD5C7520207E12DB32B0 /* Build configuration list for PBXNativeTarget "Pomodoro" */ = {
+		3E60CD5C7520207E12DB32B0 /* Build configuration list for PBXNativeTarget "Pomodorino" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEBBBBB923CEF08235AC4782 /* Debug */,
