@@ -12,15 +12,12 @@ The Pomodoro timer for people who tried the others and got annoyed.
 
 ## Screenshots
 
-<p align="center">
-  <img src="screenshots/timer-running.png" width="280" alt="Timer Running" />
-  <img src="screenshots/break-running.png" width="280" alt="Break Running" />
-  <img src="screenshots/stats.png" width="280" alt="Stats" />
-</p>
-
-<p align="center">
-  <img src="screenshots/settings.png" width="280" alt="Settings" />
-</p>
+| | | |
+|:---:|:---:|:---:|
+| ![Timer](screenshots/timer-running.png) | ![Break](screenshots/break-running.png) | ![Stats](screenshots/stats.png) |
+| Work Session | Break Time | Today's Stats |
+| ![Weekly](screenshots/stats-week.png) | ![Settings](screenshots/settings.png) | ![Idle](screenshots/timer-idle.png) |
+| Weekly Chart | Settings | Ready to Start |
 
 ---
 
