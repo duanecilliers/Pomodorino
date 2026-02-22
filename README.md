@@ -81,6 +81,16 @@ Apps like Session and Flow offer more features—but at a cost:
 
 ### From Source
 
+#### Via Install Script
+Build and install to `/Applications` in one command:
+```bash
+git clone https://github.com/duanecilliers/Pomodorino.git
+cd Pomodorino
+chmod +x install.sh
+./install.sh
+```
+
+#### Via Xcode
 ```bash
 git clone https://github.com/duanecilliers/Pomodorino.git
 cd Pomodorino
