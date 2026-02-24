@@ -98,12 +98,21 @@ open Pomodorino.xcodeproj
 # Build with ⌘B, Run with ⌘R
 ```
 
+### Download
+
+Grab the latest DMG from [GitHub Releases](https://github.com/duanecilliers/Pomodorino/releases), open it, and drag Pomodorino to Applications.
+
 ### Homebrew
 
 ```bash
 brew tap duanecilliers/pomodorino
 brew install --cask pomodorino
 ```
+
+> **Note:** The app is not notarized, so macOS may show a "damaged" warning on first launch. Run this to fix it:
+> ```bash
+> xattr -cr /Applications/Pomodorino.app
+> ```
 
 ---
 
