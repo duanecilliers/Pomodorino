@@ -98,9 +98,10 @@ open Pomodorino.xcodeproj
 # Build with ⌘B, Run with ⌘R
 ```
 
-### Homebrew (coming soon)
+### Homebrew
 
 ```bash
+brew tap duanecilliers/pomodorino
 brew install --cask pomodorino
 ```
 
