@@ -53,5 +53,8 @@ codesign --deep --force --options runtime --sign - "/Applications/${APP_NAME}.ap
 echo -e "${YELLOW}Removing quarantine flag...${NC}"
 xattr -dr com.apple.quarantine "/Applications/${APP_NAME}.app" 2>/dev/null || true
 
+echo -e "${BLUE}Cleaning up build artifacts...${NC}"
+rm -rf build
+
 echo -e "${GREEN}Installed successfully.${NC}"
 echo -e "${GREEN}You can now open ${APP_NAME} from Applications.${NC}"
