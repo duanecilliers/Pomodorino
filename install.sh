@@ -39,8 +39,10 @@ if [ ! -d "$APP_PATH" ]; then
   exit 1
 fi
 
-echo -e "${YELLOW}Removing old installation...${NC}"
-rm -rf "/Applications/${APP_NAME}.app"
+if [ -d "/Applications/${APP_NAME}.app" ]; then
+  echo -e "${YELLOW}Removing old installation...${NC}"
+  rm -rf "/Applications/${APP_NAME}.app"
+fi
 
 echo -e "${BLUE}Copying to /Applications...${NC}"
 cp -R "$APP_PATH" /Applications/
