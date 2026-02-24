@@ -1,54 +1,11 @@
-# Release workflow: builds a signed DMG and creates a GitHub Release on tag push.
+# Release workflow: builds a DMG and creates a GitHub Release on tag push.
 #
 # Usage:
 #   git tag v1.0.0
 #   git push origin v1.0.0
 #
 # Requirements:
-#   - HOMEBREW_TAP_TOKEN secret: a GitHub PAT with `repo` scope on duanecilliers/homebrew-pomodorino
-#
-# ---
-# Tap repo setup (duanecilliers/homebrew-pomodorino)
-#
-# Repository structure:
-#   homebrew-pomodorino/
-#   ├── Casks/
-#   │   └── pomodorino.rb
-#   └── .github/
-#       └── workflows/
-#           └── update-cask.yml
-#
-# Cask formula (Casks/pomodorino.rb):
-#
-#   cask "pomodorino" do
-#     version "1.0.0"
-#     sha256 "PLACEHOLDER"
-#
-#     url "https://github.com/duanecilliers/Pomodorino/releases/download/v#{version}/Pomodorino-#{version}.dmg"
-#     name "Pomodorino"
-#     desc "A little tomato for your menu bar — Pomodoro timer for macOS"
-#     homepage "https://github.com/duanecilliers/Pomodorino"
-#
-#     depends_on macos: ">= :ventura"
-#
-#     app "Pomodorino.app"
-#
-#     zap trash: [
-#       "~/Library/Application Support/Pomodoro",
-#       "~/Library/Preferences/com.pomodoro.app.plist",
-#     ]
-#
-#     livecheck do
-#       url :url
-#       strategy :github_latest
-#     end
-#   end
-#
-# Auto-update workflow (update-cask.yml):
-#   Triggers on `repository_dispatch` event (type: update-cask) from this workflow.
-#   Receives the new version and SHA256 in the client_payload, then updates the
-#   cask formula and commits the change automatically.
-# ---
+#   - HOMEBREW_TAP_TOKEN secret: a GitHub PAT scoped to duanecilliers/homebrew-pomodorino
 
 name: Release
 
