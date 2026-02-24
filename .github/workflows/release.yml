@@ -1,0 +1,111 @@
+# Release workflow: builds a DMG and creates a GitHub Release on tag push.
+#
+# Usage:
+#   git tag v1.0.0
+#   git push origin v1.0.0
+#
+# Requirements:
+#   - HOMEBREW_TAP_TOKEN secret: a GitHub PAT scoped to duanecilliers/homebrew-pomodorino
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+env:
+  APP_NAME: Pomodorino
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Verify tag matches Info.plist version
+        run: |
+          PLIST_VERSION=$(grep -A1 "CFBundleShortVersionString" Pomodorino/Resources/Info.plist | tail -1 | sed 's/.*<string>\(.*\)<\/string>.*/\1/')
+          if [ "$PLIST_VERSION" != "${{ steps.version.outputs.VERSION }}" ]; then
+            echo "::error::Tag version (${{ steps.version.outputs.VERSION }}) does not match Info.plist version ($PLIST_VERSION)"
+            exit 1
+          fi
+          echo "Version verified: $PLIST_VERSION"
+
+      - name: Build archive
+        run: |
+          xcodebuild -project Pomodorino.xcodeproj \
+            -scheme Pomodorino \
+            -configuration Release \
+            -archivePath build/${{ env.APP_NAME }}.xcarchive \
+            archive \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Export app from archive
+        run: |
+          mkdir -p build/export
+          cp -R "build/${{ env.APP_NAME }}.xcarchive/Products/Applications/${{ env.APP_NAME }}.app" build/export/
+
+      - name: Create DMG
+        run: |
+          hdiutil create \
+            -volname "${{ env.APP_NAME }}" \
+            -srcfolder build/export \
+            -ov -format UDZO \
+            "build/${{ env.APP_NAME }}-${{ steps.version.outputs.VERSION }}.dmg"
+
+      - name: Generate SHA256
+        id: sha
+        run: |
+          SHA=$(shasum -a 256 "build/${{ env.APP_NAME }}-${{ steps.version.outputs.VERSION }}.dmg" | awk '{ print $1 }')
+          echo "SHA256=$SHA" >> "$GITHUB_OUTPUT"
+          echo "SHA256: $SHA"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/${{ env.APP_NAME }}-${{ steps.version.outputs.VERSION }}.dmg
+          generate_release_notes: true
+          body: |
+            ## Install
+
+            **Homebrew:**
+            ```bash
+            brew tap duanecilliers/pomodorino
+            brew install --cask pomodorino
+            ```
+
+            **Manual:** Download `Pomodorino-${{ steps.version.outputs.VERSION }}.dmg` below, open it, and drag Pomodorino to Applications.
+
+            ---
+
+            **SHA256:** `${{ steps.sha.outputs.SHA256 }}`
+
+      - name: Trigger tap repo update
+        if: env.HOMEBREW_TAP_TOKEN != ''
+        env:
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+        run: |
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $HOMEBREW_TAP_TOKEN" \
+            https://api.github.com/repos/duanecilliers/homebrew-pomodorino/dispatches \
+            -d '{
+              "event_type": "update-cask",
+              "client_payload": {
+                "version": "${{ steps.version.outputs.VERSION }}",
+                "sha256": "${{ steps.sha.outputs.SHA256 }}"
+              }
+            }'
