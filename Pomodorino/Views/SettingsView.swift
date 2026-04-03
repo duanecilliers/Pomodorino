@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var settings: AppSettings
+    @ObservedObject var distractionBlocker: DistractionBlocker
+    @State private var newDomain: String = ""
 
     var body: some View {
         ScrollView {
@@ -44,6 +46,49 @@ struct SettingsView: View {
 
                 Toggle("Auto-start next session", isOn: $settings.autoStartNextSession)
                 Toggle("Launch at login", isOn: $settings.launchAtLogin)
+
+                Divider()
+
+                // Distraction Blocker
+                Text("Distraction Blocker")
+                    .font(.headline)
+
+                Toggle("Enable distraction blocker", isOn: $settings.distractionBlockerEnabled)
+                    .disabled(distractionBlocker.isBlocking)
+
+                ForEach(settings.blockedDomains, id: \.self) { domain in
+                    HStack {
+                        Text(domain)
+                        Spacer()
+                        Button(action: {
+                            settings.blockedDomains.removeAll { $0 == domain }
+                        }) {
+                            Image(systemName: "minus.circle")
+                                .foregroundColor(.red)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .disabled(distractionBlocker.isBlocking)
+                }
+
+                HStack {
+                    TextField("Add domain...", text: $newDomain)
+                        .disabled(distractionBlocker.isBlocking)
+                    Button("Add") {
+                        let trimmedDomain = newDomain.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                        if !trimmedDomain.isEmpty {
+                            settings.blockedDomains.append(trimmedDomain)
+                            newDomain = ""
+                        }
+                    }
+                    .disabled(distractionBlocker.isBlocking || newDomain.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+
+                if distractionBlocker.isBlocking {
+                    Text("Reset timer to change")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
 
                 Divider()
 

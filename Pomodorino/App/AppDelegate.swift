@@ -12,6 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var analyticsStore: AnalyticsStore!
     private var shortcutManager: ShortcutManager!
     private var notificationManager: NotificationManager!
+    private var distractionBlocker: DistractionBlocker!
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -27,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
         notificationManager = NotificationManager()
         notificationManager.requestPermission()
+        
+        distractionBlocker = DistractionBlocker(settings: settings)
 
         // Session completion notifications
         pomodoroTimer.onSessionComplete = { [weak self] completedType in
@@ -60,7 +63,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             rootView: PopoverView(
                 timer: pomodoroTimer,
                 settings: settings,
-                analyticsStore: analyticsStore
+                analyticsStore: analyticsStore,
+                distractionBlocker: distractionBlocker
             )
         )
 
@@ -70,6 +74,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _, _, _ in
                 self?.updateStatusBar()
+            }
+            .store(in: &cancellables)
+        
+        // Observe timer state for distraction blocking
+        pomodoroTimer.$timerState
+            .combineLatest(pomodoroTimer.$sessionType)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state, sessionType in
+                guard let self = self else { return }
+                if state == .running && sessionType == .work {
+                    self.distractionBlocker.activateBlocking()
+                } else if state == .idle || sessionType != .work {
+                    self.distractionBlocker.deactivateBlocking()
+                }
             }
             .store(in: &cancellables)
 
@@ -127,5 +145,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
             popover.contentViewController?.view.window?.makeKey()
         }
+    }
+    
+    func applicationWillTerminate(_ notification: Notification) {
+        distractionBlocker.deactivateBlocking()
     }
 }

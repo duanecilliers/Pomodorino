@@ -10,6 +10,7 @@ struct PopoverView: View {
     @ObservedObject var timer: PomodoroTimer
     @ObservedObject var settings: AppSettings
     @ObservedObject var analyticsStore: AnalyticsStore
+    @ObservedObject var distractionBlocker: DistractionBlocker
     @State private var selectedTab: PopoverTab = .timer
 
     var body: some View {
@@ -32,7 +33,7 @@ struct PopoverView: View {
             case .stats:
                 StatsView(analyticsStore: analyticsStore)
             case .settings:
-                SettingsView(settings: settings)
+                SettingsView(settings: settings, distractionBlocker: distractionBlocker)
             }
         }
         .frame(width: 320, height: 420)

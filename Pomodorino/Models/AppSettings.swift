@@ -30,6 +30,17 @@ class AppSettings: ObservableObject {
             updateLaunchAtLogin()
         }
     }
+    @Published var distractionBlockerEnabled: Bool {
+        didSet { UserDefaults.standard.set(distractionBlockerEnabled, forKey: "distractionBlockerEnabled") }
+    }
+    @Published var blockedDomains: [String] {
+        didSet {
+            if let data = try? JSONEncoder().encode(blockedDomains),
+               let jsonString = String(data: data, encoding: .utf8) {
+                UserDefaults.standard.set(jsonString, forKey: "blockedDomains")
+            }
+        }
+    }
 
     init() {
         let defaults = UserDefaults.standard
@@ -43,6 +54,8 @@ class AppSettings: ObservableObject {
             "audioEnabled": true,
             "tickerEnabled": true,
             "launchAtLogin": false,
+            "distractionBlockerEnabled": false,
+            "blockedDomains": "[\"youtube.com\",\"www.youtube.com\"]",
         ])
 
         self.workDuration = defaults.integer(forKey: "workDuration")
@@ -53,6 +66,16 @@ class AppSettings: ObservableObject {
         self.audioEnabled = defaults.bool(forKey: "audioEnabled")
         self.tickerEnabled = defaults.bool(forKey: "tickerEnabled")
         self.launchAtLogin = defaults.bool(forKey: "launchAtLogin")
+        self.distractionBlockerEnabled = defaults.bool(forKey: "distractionBlockerEnabled")
+        
+        // Handle blockedDomains with JSON decoding
+        if let jsonString = defaults.string(forKey: "blockedDomains"),
+           let data = jsonString.data(using: .utf8),
+           let domains = try? JSONDecoder().decode([String].self, from: data) {
+            self.blockedDomains = domains
+        } else {
+            self.blockedDomains = ["youtube.com", "www.youtube.com"]
+        }
     }
 
     private func updateLaunchAtLogin() {
