@@ -1,11 +1,5 @@
-# Release workflow: builds a DMG and creates a GitHub Release on tag push.
-#
-# Usage:
-#   git tag v1.0.0
-#   git push origin v1.0.0
-#
-# Requirements:
-#   - HOMEBREW_TAP_TOKEN secret: a GitHub PAT scoped to duanecilliers/homebrew-pomodorino
+# Release workflow: builds a valid app bundle, packages it in a DMG, and
+# publishes it when a version tag is pushed.
 
 name: Release
 
@@ -41,29 +35,8 @@ jobs:
           fi
           echo "Version verified: $PLIST_VERSION"
 
-      - name: Build archive
-        run: |
-          xcodebuild -project Pomodorino.xcodeproj \
-            -scheme Pomodorino \
-            -configuration Release \
-            -archivePath build/${{ env.APP_NAME }}.xcarchive \
-            archive \
-            CODE_SIGN_IDENTITY="-" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
-
-      - name: Export app from archive
-        run: |
-          mkdir -p build/export
-          cp -R "build/${{ env.APP_NAME }}.xcarchive/Products/Applications/${{ env.APP_NAME }}.app" build/export/
-
-      - name: Create DMG
-        run: |
-          hdiutil create \
-            -volname "${{ env.APP_NAME }}" \
-            -srcfolder build/export \
-            -ov -format UDZO \
-            "build/${{ env.APP_NAME }}-${{ steps.version.outputs.VERSION }}.dmg"
+      - name: Build and validate DMG
+        run: ./scripts/build-release.sh
 
       - name: Generate SHA256
         id: sha
@@ -87,6 +60,8 @@ jobs:
             ```
 
             **Manual:** Download `Pomodorino-${{ steps.version.outputs.VERSION }}.dmg` below, open it, and drag Pomodorino to Applications.
+
+            On first launch, macOS may ask you to confirm that you want to open an app from an unidentified developer. Control-click Pomodorino, choose **Open**, then confirm **Open**.
 
             ---
 
