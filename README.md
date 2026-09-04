@@ -69,7 +69,7 @@ Apps like Session and Flow offer more features—but at a cost:
 
 - **Menu bar timer** — Always visible countdown
 - **One-click controls** — Start, pause, reset, skip
-- **Global shortcut** — `⌃⌥P` to toggle from anywhere
+- **Global shortcut** — Toggle from anywhere; customize it in Settings
 - **Completion chimes** — With 10-second countdown ticker
 - **Local analytics** — Daily, weekly, monthly stats
 - **Launch at login** — Always ready
@@ -126,7 +126,7 @@ brew install --cask pomodorino
 
 After 4 pomodoros, you get a long break. That's it.
 
-**Keyboard shortcut:** `⌃⌥P` toggles start/pause from any app.
+**Keyboard shortcut:** `⌃⌥P` toggles start/pause from any app by default. Change it in Settings to any key combination with a modifier.
 
 ---
 
@@ -138,6 +138,7 @@ After 4 pomodoros, you get a long break. That's it.
 - Pomodoros before long break (default: 4)
 - Auto-start next session
 - Audio on/off
+- Custom global Start/Pause shortcut
 - Launch at login
 
 ---

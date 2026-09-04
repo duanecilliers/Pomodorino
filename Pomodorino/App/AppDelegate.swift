@@ -78,7 +78,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         shortcutManager.onToggle = { [weak self] in
             self?.pomodoroTimer.toggleStartPause()
         }
-        shortcutManager.register()
+        shortcutManager.register(
+            keyCode: settings.shortcutKeyCode,
+            modifiers: settings.shortcutModifiers
+        )
+        Publishers.CombineLatest(settings.$shortcutKeyCode, settings.$shortcutModifiers)
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] keyCode, modifiers in
+                self?.shortcutManager.register(keyCode: keyCode, modifiers: modifiers)
+            }
+            .store(in: &cancellables)
 
         updateStatusBar()
     }
