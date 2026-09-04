@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 struct SettingsView: View {
@@ -47,7 +48,7 @@ struct SettingsView: View {
 
                 Divider()
 
-                // Shortcut info
+                // Global shortcut
                 Text("Keyboard Shortcut")
                     .font(.headline)
 
@@ -55,13 +56,21 @@ struct SettingsView: View {
                     Text("Start / Pause")
                         .foregroundColor(.secondary)
                     Spacer()
-                    Text("⌃⌥P")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color.gray.opacity(0.15))
-                        .cornerRadius(6)
-                        .font(.system(.body, design: .monospaced))
+                    ShortcutRecorder(
+                        keyCode: $settings.shortcutKeyCode,
+                        modifiers: $settings.shortcutModifiers
+                    )
+                    .frame(width: 120, height: 28)
+                    Button("Reset") {
+                        settings.shortcutKeyCode = 35
+                        settings.shortcutModifiers = 6144
+                    }
+                    .controlSize(.small)
                 }
+
+                Text("Click the shortcut, then press a key combination with at least one modifier.")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
 
                 Divider()
 
@@ -72,5 +81,50 @@ struct SettingsView: View {
             }
             .padding()
         }
+    }
+}
+
+private struct ShortcutRecorder: NSViewRepresentable {
+    @Binding var keyCode: Int
+    @Binding var modifiers: Int
+
+    func makeNSView(context: Context) -> ShortcutRecorderButton {
+        let button = ShortcutRecorderButton()
+        button.onShortcut = { keyCode, modifiers in
+            self.keyCode = keyCode
+            self.modifiers = modifiers
+        }
+        return button
+    }
+
+    func updateNSView(_ button: ShortcutRecorderButton, context: Context) {
+        button.title = ShortcutManager.displayString(keyCode: keyCode, modifiers: modifiers)
+    }
+}
+
+private final class ShortcutRecorderButton: NSButton {
+    var onShortcut: ((Int, Int) -> Void)?
+
+    override var acceptsFirstResponder: Bool { true }
+
+    override func mouseDown(with event: NSEvent) {
+        window?.makeFirstResponder(self)
+        super.mouseDown(with: event)
+    }
+
+    override func keyDown(with event: NSEvent) {
+        if event.keyCode == 53 {
+            window?.makeFirstResponder(nil)
+            return
+        }
+
+        let modifiers = ShortcutManager.carbonModifiers(from: event.modifierFlags)
+        guard modifiers != 0 else {
+            NSSound.beep()
+            return
+        }
+
+        onShortcut?(Int(event.keyCode), modifiers)
+        window?.makeFirstResponder(nil)
     }
 }

@@ -30,6 +30,12 @@ class AppSettings: ObservableObject {
             updateLaunchAtLogin()
         }
     }
+    @Published var shortcutKeyCode: Int {
+        didSet { UserDefaults.standard.set(shortcutKeyCode, forKey: "shortcutKeyCode") }
+    }
+    @Published var shortcutModifiers: Int {
+        didSet { UserDefaults.standard.set(shortcutModifiers, forKey: "shortcutModifiers") }
+    }
 
     init() {
         let defaults = UserDefaults.standard
@@ -43,6 +49,8 @@ class AppSettings: ObservableObject {
             "audioEnabled": true,
             "tickerEnabled": true,
             "launchAtLogin": false,
+            "shortcutKeyCode": 35,
+            "shortcutModifiers": 6144,
         ])
 
         self.workDuration = defaults.integer(forKey: "workDuration")
@@ -53,6 +61,8 @@ class AppSettings: ObservableObject {
         self.audioEnabled = defaults.bool(forKey: "audioEnabled")
         self.tickerEnabled = defaults.bool(forKey: "tickerEnabled")
         self.launchAtLogin = defaults.bool(forKey: "launchAtLogin")
+        self.shortcutKeyCode = defaults.integer(forKey: "shortcutKeyCode")
+        self.shortcutModifiers = defaults.integer(forKey: "shortcutModifiers")
     }
 
     private func updateLaunchAtLogin() {
